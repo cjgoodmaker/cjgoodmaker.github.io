@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr Charles Goodmaker — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #07080d;
+    --deep: #0c0e18;
+    --midnight: #111328;
+    --moon-white: #e8eaf0;
+    --moon-core: #f5f6fa;
+    --shimmer: rgba(200, 210, 235, 0.15);
+    --text-primary: #c8cdd8;
+    --text-secondary: #7a8099;
+    --accent: #a0b4d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--ink); }
+
+  body {
+    background: var(--ink);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--ink);
+  }
+
+  /* Hero text */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+  @keyframes textReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--moon-white);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3em;
+    text-shadow: 0 0 80px rgba(200, 210, 240, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 400;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+  }
+
+  .hero-links {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: textReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
+  }
+
+  .hero-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s, text-shadow 0.3s;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(120, 130, 160, 0.2);
+  }
+
+  .hero-links a:hover {
+    color: var(--moon-white);
+    text-shadow: 0 0 20px rgba(200, 210, 240, 0.3);
+    border-bottom-color: rgba(200, 210, 240, 0.4);
+  }
+
+  /* ============ CONTENT SECTIONS ============ */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  section {
+    padding: 6rem 0;
+    border-bottom: 1px solid rgba(120, 130, 160, 0.08);
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 2rem;
+    color: var(--moon-white);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============ PROJECT CARDS ============ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .project {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(120, 130, 160, 0.06);
+    transition: background 0.4s;
+    position: relative;
+  }
+
+  .project:last-child { border-bottom: none; }
+
+  .project:hover {
+    background: rgba(120, 130, 160, 0.03);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--moon-white);
+    letter-spacing: 0.01em;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 3px 10px;
+    border: 1px solid rgba(120, 130, 160, 0.15);
+    border-radius: 2px;
+  }
+
+  .project-description {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 700px;
+  }
+
+  .project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s, letter-spacing 0.3s;
+  }
+
+  .project-link:hover {
+    color: var(--moon-white);
+    letter-spacing: 0.15em;
+  }
+
+  .project-link::after {
+    content: ' \2192';
+  }
+
+  /* Project images */
+  .project-images {
+    margin: 1.2rem 0;
+    display: flex;
+    gap: 0.75rem;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .project-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(120, 130, 160, 0.1);
+    opacity: 0.85;
+    transition: opacity 0.4s;
+    display: block;
+  }
+
+  .project-images img:hover {
+    opacity: 1;
+  }
+
+  .project-images.dual img {
+    width: calc(50% - 0.375rem);
+    flex-shrink: 0;
+  }
+
+  /* ============ ABOUT ============ */
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--text-secondary);
+    max-width: 650px;
+  }
+
+  .about-text strong {
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+
+  /* ============ PUBLICATIONS ============ */
+  .pub {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(120, 130, 160, 0.05);
+  }
+
+  .pub:last-child { border-bottom: none; }
+
+  .pub-title {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+  }
+
+  .pub-journal {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(120, 130, 160, 0.15);
+    transition: color 0.3s;
+  }
+
+  footer a:hover { color: var(--moon-white); }
+
+  /* ============ SCROLL ANIMATIONS ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    section { padding: 4rem 0; }
+    .hero-links { flex-direction: column; align-items: center; gap: 1rem; }
+    .project-images.dual { flex-direction: column; }
+    .project-images.dual img { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="hero-name">Charles Goodmaker</h1>
+    <p class="hero-subtitle">Clinician &middot; Engineer &middot; Researcher</p>
+    <div class="hero-links">
+      <a href="#projects">Projects</a>
+      <a href="#research">Research</a>
+      <a href="#about">About</a>
+      <a href="https://linkedin.com/in/charles-goodmaker" target="_blank">LinkedIn</a>
+      <a href="https://github.com/cgoodmaker" target="_blank">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="content">
+  <section id="projects">
+    <div class="section-label reveal">Products & Tools</div>
+
+    <div class="projects-grid">
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">InfusionSim</span>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Live</span>
+          </div>
+        </div>
+        <div class="project-images dual">
+          <img src="assets/infusionsim1.png" alt="InfusionSim scenario editor" loading="lazy">
+          <img src="assets/infusionsim2.png" alt="InfusionSim EPR simulation" loading="lazy">
+        </div>
+        <p class="project-description">Web application simulating electronic patient records for hospital clinical simulations. Built from a real need — existing tools didn't replicate EPR workflows. Sprint-developed MVP now in live use with ongoing clinician feedback.</p>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">SkinProAI</span>
+          <div class="project-tags">
+            <span class="tag">Next.js</span>
+            <span class="tag">MedGemma</span>
+            <span class="tag">MCP</span>
+          </div>
+        </div>
+        <div class="project-images">
+          <img src="assets/skinproai.png" alt="SkinProAI interface" loading="lazy">
+        </div>
+        <p class="project-description">Agentic clinical AI system for dermatological assessment, built for the Kaggle MedGemma competition. Orchestrates specialist diagnostic tools via Model Context Protocol — SAM2 segmentation, ConvNeXt classification, Grad-CAM attention maps — around a foundation vision-language model. Patient-facing upload, analysis, and longitudinal tracking workflow.</p>
+        <a href="https://youtube.com/watch?v=c80T3bRAGFM" class="project-link" target="_blank">Watch demo</a>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">Lemniscus</span>
+          <div class="project-tags">
+            <span class="tag">MCP</span>
+            <span class="tag">Swift</span>
+          </div>
+        </div>
+        <div class="project-images">
+          <img src="assets/lemniscus.png" alt="Lemniscus macOS app" loading="lazy">
+        </div>
+        <p class="project-description">Model Context Protocol server enabling AI agents to query and analyse Apple Health wearable data. Companion Swift macOS desktop app for local data management. Early-stage research alongside exploring how data presentation format affects LLM diagnostic reasoning.</p>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">LabKnowts</span>
+          <div class="project-tags">
+            <span class="tag">MCP</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+        <div class="project-images">
+          <img src="assets/labknowts.png" alt="LabKnowts web interface" loading="lazy">
+        </div>
+        <p class="project-description">MCP server with a React web app for visualising research notes. Temporally saves LLM outputs as structured lab notes — acting as a context bank across AI-assisted sessions. Cross-project search, dimensional forking for experiment branching, and timestamped logging. Built to solve my own workflow problem; used daily.</p>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">Hypothify / Obolus</span>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">RAG</span>
+            <span class="tag">GCP</span>
+          </div>
+        </div>
+        <div class="project-images">
+          <img src="assets/obolus.jpeg" alt="Obolus grant search engine" loading="lazy">
+        </div>
+        <p class="project-description">AI-powered research platform with FAISS semantic search for healthcare researchers. Obolus — a clinical research grant search engine — shipped live on GCP. Piloted in an NHS trust. NHS Clinical Entrepreneur Programme and London Digital Health Launchpad.</p>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">ClinBench</span>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Benchmarking</span>
+          </div>
+        </div>
+        <div class="project-images">
+          <img src="assets/clinbench.jpeg" alt="ClinBench benchmark tracker" loading="lazy">
+        </div>
+        <p class="project-description">Open web platform for tracking clinical LLM research benchmarks. Aggregates and compares model performance across medical tasks and datasets, providing transparent leaderboards and benchmark exploration.</p>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-header">
+          <span class="project-name">Facial Trauma Scoring Tool</span>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">In progress</span>
+          </div>
+        </div>
+        <p class="project-description">Clinical scoring tool translating facial trauma assessment criteria into structured digital workflows for emergency and surgical settings.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-label reveal">Research</div>
+
+    <div class="project reveal">
+      <div class="project-header">
+        <span class="project-name">MOLAR-1: Foundation Models for Oral Medicine</span>
+      </div>
+      <p class="project-description">Building a 6,346-image oral lesion dataset (OMID) from open-access literature using Gemini extraction pipelines. Training self-supervised models (SimCLR, BYOL, DINO) for lesion classification with external validation against published datasets. Preprint 2026.</p>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-header">
+        <span class="project-name">ISIC MILK10k Skin Lesion Challenge</span>
+        <div class="project-tags">
+          <span class="tag">Top 10</span>
+          <span class="tag">ConvNeXt</span>
+          <span class="tag">MedSigLIP</span>
+        </div>
+      </div>
+      <p class="project-description">Ensemble approach blending MedSigLIP (15 models: 3-seed &times; 5-fold) and ConvNeXt (5-fold) at a 65/35 weighting. Metadata-driven post-processing &mdash; conservative probability multipliers on rare classes informed by EDA patterns &mdash; lifted balanced accuracy from 0.511 to 0.538 with zero retraining. K-fold combined training on MILK10k plus supplementary ISIC rare-class images pushed validation balanced accuracy to 0.83, avoiding the catastrophic forgetting seen with sequential fine-tuning.</p>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-header">
+        <span class="project-name">LLM Evaluation in Clinical Summarisation</span>
+      </div>
+      <p class="project-description">Benchmarking study evaluating LLMs for summarising oral & maxillofacial surgery research using ROUGE, BLEU, and LLM-as-a-Judge approaches. Presented at IJOMS 2025.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label reveal">About</div>
+    <div class="about-text reveal">
+      <p>Dual-qualified clinician (<strong>Medicine & Dentistry, GMC-registered</strong>) who builds digital health tools. Currently an Oral & Maxillofacial Surgery Education Fellow at Barts Health NHS Trust.</p>
+      <br>
+      <p>Alongside clinical work I design and ship products — from clinical education software to AI-powered research platforms. I have experience in <strong>clinical governance and quality assurance</strong> of digital health platforms, and have worked closely with clinical leadership to build high-quality educational programmes, improvement projects, and pathway integrations.</p>
+      <br>
+      <p>I am looking to bring this clinical and technical product experience into a team building AI tools that support care delivery.</p>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-label reveal">Publications</div>
+
+    <div class="pub reveal">
+      <p class="pub-title">AI for Classifying Oral Cancer and Precursor Lesions Using Visible-Light Photography</p>
+      <p class="pub-journal">Goodmaker C, Bhandari R, Tappuni A, Pham T. Preprint, 2026</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Clinicians' awareness of TMJ exercises for the management of temporomandibular joint dysfunction within a tertiary dental hospital</p>
+      <p class="pub-journal">Boutros C, Oikonomou C, Goodmaker C. British Journal of Oral and Maxillofacial Surgery, 2025</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Evaluating the quality of LLMs in summarising oral and maxillofacial surgery research papers</p>
+      <p class="pub-journal">Ayub A, Goodmaker C, Bhandari R, Holmes S. British Journal of Oral and Maxillofacial Surgery, 2025</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Evaluating The Quality of LLMs in Summarising Oral and Maxillofacial Surgery Research Papers</p>
+      <p class="pub-journal">Ayub A, Goodmaker C, Holmes S, Bhandari R. International Journal of Oral and Maxillofacial Surgery, 2025</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Naso-orbito-ethmoid fractures</p>
+      <p class="pub-journal">Goodmaker C, Hohman MH, De Jesus O. StatPearls, 2023</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Vitamin D repletion in primary hyperparathyroid patients undergoing parathyroidectomy leads to reduced symptomatic hypocalcaemia and reduced length of stay</p>
+      <p class="pub-journal">Acharya R, Kopczynska M, Goodmaker C, Mukherjee A, Doran H. Annals of The Royal College of Surgeons of England, 2022</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Paving the road to recovery: the colorectal surgery ERAS pathway during the COVID-19 pandemic</p>
+      <p class="pub-journal">Goodmaker CJG, Kopczynska M, Meskell R, Slade D. British Journal of Surgery, 2021</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Antibiotic prophylaxis for urinary catheter manipulation following arthroplasty: a systematic review</p>
+      <p class="pub-journal">Roberts T, Smith TO, Simon H, Goodmaker C, Hing CB. ANZ Journal of Surgery, 2021</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Nasal fracture</p>
+      <p class="pub-journal">Goodmaker C, De Jesus O. StatPearls, 2020</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Antibiotic prophylaxis for urinary catheter manipulation following arthroplasty: a systematic review</p>
+      <p class="pub-journal">Roberts T, Smith T, Simon H, Goodmaker C, Hing C. Orthopaedic Proceedings (Bone &amp; Joint), 2020</p>
+    </div>
+    <div class="pub reveal">
+      <p class="pub-title">Identification of compounds with anti-human cytomegalovirus activity that inhibit production of IE2 proteins</p>
+      <p class="pub-journal">Beelontally R, Wilkie GS, Lau B, Goodmaker CJ, et al. Antiviral Research, 2017</p>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Dr Charles Goodmaker &middot; BSc (Hons), BDS, MBBS, MRCS</p>
+  <p style="margin-top: 0.5rem;">
+    <a href="https://linkedin.com/in/charles-goodmaker" target="_blank">LinkedIn</a> &middot;
+    <a href="https://github.com/cgoodmaker" target="_blank">GitHub</a>
+  </p>
+</footer>
+
+<script>
+  // Intersection Observer for scroll reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
